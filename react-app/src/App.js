@@ -8,6 +8,9 @@ import {
 } from './config'
 import axios from 'axios';
 import moment from 'moment-timezone'
+import ConfirmModal from './component/ConfirmModal'
+ 
+
 function App() {
   
   const [anotherSelection, setAnotherSelection] = useState('dnone')
@@ -24,8 +27,12 @@ function App() {
   const [rate,setRate] = useState(0)
   const [TWDRate,setTWDRate] = useState(0)
   const inputRef = useRef(null)
-  
   const [updatedTime,setUpdatedTime] = useState('')
+
+  //Modal settings
+ const [showUp, setShowUp] = useState('')
+
+  
 
   const displayAnother=()=>{
      if (anotherSelection === 'dnone') {
@@ -61,20 +68,23 @@ function App() {
   return (
     <>
       <div className="container">
-      <div className="d-flex col-7 mt-5 title p-0">
-      
-        <p className="page-header mb-0">即時匯率</p>
-        <p className="updatedTime ">更新時間:{updatedTime}</p>
+      <div class="row mt-5 mb-0">
+        <div className="d-flex col-7 offset-1 p-0">
+         <div className="calculator p-0"></div> 
+         <div className="space"></div>
+          <p className="page-header  mb-0">即時匯率</p>
+          <p className="updatedTime ">更新時間:{updatedTime}</p>
+        </div>
       </div>
       <div className="row">
-        <div className="main-area col-7">
+        <div className="main-area col-7 offset-1">
          {/* <i className="fas fa-sync-alt"></i> */}
           <div className="currency-field">
             <div className="input_div ml-2 col-5 py-3">
              <div className={currency?'TAIWAN-Flag col-3':'search_icon col-3'}><img src={currency?`./${currency}.png`:'./Search.png'} alt=""/></div>
-             <p className="input1" ref={inputRef}>{currency_ChineseList[currency]? currency_ChineseList[currency]:'請選擇兌換幣別'}</p>
+             <p className="input1_grey" ref={inputRef}>{currency_ChineseList[currency]? currency_ChineseList[currency]:'請選擇兌換幣別'}</p>
                <div className="arrow" onClick={()=>{displayAnother()
-             }}><button><i className="fal fa-chevron-down"></i></button></div>
+             }}><i className="fal fa-chevron-down"></i></div>
             
             </div>
              <div className="input_div ml-2 col-5 py-3 d-flex">
@@ -84,7 +94,7 @@ function App() {
               
              </div>
           </div>
-          <div className="selection">
+          <div className={`selection ${anotherSelection}`}>
             <div className={`select-area col-5 ${anotherSelection}`}>
               <ul>
               { currencyList.map((v,key)=>{
@@ -108,24 +118,32 @@ function App() {
             </div>
             <div className="col-5"></div>
           </div>
-          
-          <div className="currency-field plus">
-              <input className="amount mt-3 ml-2 col-5 input2" type="number" placeholder="請輸入金額" disabled={currency_ChineseList[currency]===undefined? 'disabled':''} onChange={(e)=>{
+          <div className="currency-field">
+              <input className="amount mt-3 ml-2 col-5 input2" type="number" placeholder="請輸入金額" 
+              
+              onClick={(e)=>{
+                  currency_ChineseList[currency] === undefined ?setShowUp('fade-in'):<></>        
+              }} onChange={(e)=>{
                  setInputCurrency(e.target.value)
                  exchange(currency)
              }}
              />
-             <input className="amount mt-3 ml-2 col-5 input2 "  disabled="disabled" value={
+             <input className="amount mt-3 ml-2 col-5 input2" value={
                  inputCurrency && rate ? (((inputCurrency / rate) * (TWDRate)).toFixed(4)) : 0
              }/>
           </div>
-          <div className="line-area">
-             <div className="bottomLine ml-2"></div>
-             <div className="bottomLine ml-2"></div>
-          </div>
         </div>
       </div>
+      <ConfirmModal
+      showUp={showUp}
+      setShowUp = {
+        setShowUp
+      }
+
+      />
     </div>
+
+    
 
     
     

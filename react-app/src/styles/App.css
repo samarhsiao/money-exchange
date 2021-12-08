@@ -1,18 +1,35 @@
 
 
+.main-area{
+  background-color:#b3c289a1;
+}
+
+.calculator{
+  width:48px;
+  height:48px;
+  background-image: url('../calculator.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.space{
+  width: 20px;
+  height: 20px;
+}
 .page-header {
-  font-size: 24px;
+  font-size: 28px;
   line-height:48px;
   font-weight: bold;
-  color: #1d1c1c;
+  color: #B3C289;
 }
 
 .updatedTime{
-  color:rgb(122, 122, 122);
+ color: #a2af7c;
   font-size:14px;
   line-height:56px;
   margin-bottom: 0px;
   margin-left: auto;
+ 
 }
 
 .main-area {
@@ -29,28 +46,33 @@
 
 .input_div {
   height: 60px;
-  border: 1px solid rgba(119, 119, 119, 0.521);
+  border: 1px solid white;
   border-radius: 5px;
   text-align: center;
   display:flex;
-
   
 }
-
-.input_div p{
-  font-size:18px;
-  line-height:25px;
-
+input::placeholder {
+  color:rgb(75, 75, 75);
 }
 
 .input1 {
   border: transparent;
-  width: 80%;
+  width: 60%;
   font-size:18px;
+  line-height:30px;
 }
 
 .input1:focus {
   outline: none;
+}
+
+.input1_grey{
+  border: transparent;
+  width: 60%;
+  font-size:18px;
+  line-height:30px;
+
 }
 
 .input2{
@@ -83,9 +105,6 @@ input[type=number]::-webkit-inner-spin-button {
   background-color: transparent;
 }
 
-.fa-search {
-  display: none;
-}
 
 .amount {
   height: 70px;
@@ -94,41 +113,15 @@ input[type=number]::-webkit-inner-spin-button {
   text-align: center;
 }
 
-.plus :hover {
+/* .plus :hover {
   background-color:rgb(189, 189, 189);
-}
+} */
 
 .amount p{
   font-size:18px;
 }
-.line-area{
-  display: flex;
-  justify-content: space-around;
-}
-.bottomLine {
-  width:0%;
-  border-bottom: #000 1px solid;
-}
-
-.bottomLine :hover{
-  width:47px;
-  border-bottom: #000 1px solid;
-  }
 
 
-
-
-
-
-.ex-arrow {
-  text-align: center;
-  color: #ba9af7;
-  font-size: 25px;
-  display: flex;
-  justify-content:space-around;
-   
-
-}
 
 .select-area{
   width: 100%;
@@ -168,28 +161,24 @@ input[type=number]::-webkit-inner-spin-button {
   visibility: visible;
 }
 
-.fa-sync-alt{
-  position: absolute;
-  left:50%;
-  transform: translateX(-50%);
-  top:40%;
-  color:#ba9af7;
-  font-size:45px;
-
+.TAIWAN-Flag,
+.search_icon {
+  object-fit: cover;
 }
+
 
 .TAIWAN-Flag img{
   width: 35px;
   height:30px;
-}
-.search_icon img{
-  width:25px;
-  height:25px;
+
 }
 
-.bgc{
-  background-color:#cc2525
+.search_icon img{
+  width:30px;
+  height:30px;
 }
+
+
 
 .opacity0{
   opacity: 0;
