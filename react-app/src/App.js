@@ -26,7 +26,6 @@ function App() {
 
   const [rate,setRate] = useState(0)
   const [TWDRate,setTWDRate] = useState(0)
-  const inputRef = useRef(null)
   const [updatedTime,setUpdatedTime] = useState('')
 
   //Modal settings
@@ -82,7 +81,7 @@ function App() {
           <div className="currency-field">
             <div className="input_div ml-2 col-5 py-3">
              <div className={currency?'TAIWAN-Flag col-3':'search_icon col-3'}><img src={currency?`./${currency}.png`:'./Search.png'} alt=""/></div>
-             <p className="input1_grey" ref={inputRef}>{currency_ChineseList[currency]? currency_ChineseList[currency]:'請選擇兌換幣別'}</p>
+             <p className="input1_grey">{currency_ChineseList[currency]? currency_ChineseList[currency]:'請選擇兌換幣別'}</p>
                <div className="arrow" onClick={()=>{displayAnother()
              }}><i className="fal fa-chevron-down"></i></div>
             
@@ -90,8 +89,7 @@ function App() {
              <div className="input_div ml-2 col-5 py-3 d-flex">
                {/* <div><i className="fal fa-search"></i></div> */}
                <div className="TAIWAN-Flag col-3"><img src="./TWD.png" alt=""/></div>
-             <p  className="input1">新台幣(TWD)</p> 
-              
+             <p  className="input1">新台幣(TWD)</p>              
              </div>
           </div>
           <div className={`selection ${anotherSelection}`}>
@@ -120,13 +118,13 @@ function App() {
           </div>
           <div className="currency-field">
               <input className="amount mt-3 ml-2 col-5 input2" type="number" placeholder="請輸入金額" 
-              
-              onClick={(e)=>{
-                  currency_ChineseList[currency] === undefined ?setShowUp('fade-in'):<></>        
-              }} onChange={(e)=>{
+              onFocus={()=>{
+                  currency_ChineseList[currency] === undefined ? setShowUp('fade-in') : <> </>
+              }} 
+              onChange={(e)=>{
                  setInputCurrency(e.target.value)
                  exchange(currency)
-             }}
+              }}
              />
              <input className="amount mt-3 ml-2 col-5 input2" value={
                  inputCurrency && rate ? (((inputCurrency / rate) * (TWDRate)).toFixed(4)) : 0
@@ -136,18 +134,8 @@ function App() {
       </div>
       <ConfirmModal
       showUp={showUp}
-      setShowUp = {
-        setShowUp
-      }
-
-      />
+      setShowUp={setShowUp}/>
     </div>
-
-    
-
-    
-    
-
     </>
   );
 }
